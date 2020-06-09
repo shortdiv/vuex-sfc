@@ -270,41 +270,8 @@ var pingInventory = function(item) {
   });
 };
 
-const store = new Vuex.Store({
-  state: {
-    supply: 40,
-    isRestocking: false,
-    isDispensing: false
-  },
-  actions: {
-    fetchFromInventory(context) {
-      context.commit("isRestocking", true);
-      pingInventory("chips")
-        .then(inventory => {
-          context.commit("stockItems", inventory.stock);
-        })
-        .finally(() => context.commit("isRestocking", false));
-    },
-    dispense(context) {
-      context.commit("dispense");
-    }
-  },
-  getters: {},
-  mutations: {
-    isRestocking(state, payload) {
-      state.isRestocking = payload;
-    },
-    dispense(state) {
-      state.supply--;
-    },
-    stockItems(state) {
-      state.supply = 40;
-    }
-  }
-});
 export default {
   name: "VendingMachineAdmin",
-  store: store,
   data() {
     return {
       isDispensing: false
