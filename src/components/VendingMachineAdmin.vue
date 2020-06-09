@@ -243,7 +243,7 @@
         <button class="restock-btn" @click="restock" :disabled="supply === 40">
           Restock
         </button>
-        <button class="dispense-btn" @click="dispense" :disabled="supply === 0">
+        <button class="dispense-btn" @click="dispenseItem" :disabled="supply === 0">
           Dispense
         </button>
       </div>
@@ -252,28 +252,22 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "VendingMachineAdmin",
   computed: {
-    isDispensing() {
-      return this.$store.state.isDispensing
-    },
-    supply() {
-      return this.$store.state.supply;
-    },
-    isRestocking() {
-      return this.$store.state.isRestocking;
-    },
+    ...mapState(["isDispensing", "supply", "isRestocking"]),
     isInLoadingState() {
       return this.$store.state.isRestocking || this.isDispensing;
     }
   },
   methods: {
-    dispense() {
-      this.$store.dispatch("dispense");
+    ...mapActions(["dispense", "fetchFromInventory"]),
+    dispenseItem() {
+      this.dispense();
     },
     restock() {
-      this.$store.dispatch("fetchFromInventory");
+      this.fetchFromInventory();
     }
   }
 };
