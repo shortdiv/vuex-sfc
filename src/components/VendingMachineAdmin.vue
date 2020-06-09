@@ -252,24 +252,6 @@
 </template>
 
 <script>
-import Vuex from "vuex";
-import Vue from "vue";
-
-Vue.use(Vuex);
-// fake API call //
-let inventory = {
-  chips: {
-    stock: 40
-  }
-};
-var pingInventory = function(item) {
-  return new Promise(resolve => {
-    setTimeout(function() {
-      resolve(inventory[item]);
-    }, 3000);
-  });
-};
-
 export default {
   name: "VendingMachineAdmin",
   data() {
