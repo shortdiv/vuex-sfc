@@ -256,10 +256,13 @@ export default {
   name: "VendingMachineAdmin",
   data() {
     return {
-      isDispensing: false
+      // isDispensing: false
     };
   },
   computed: {
+    isDispensing() {
+      return this.$store.state.isDispensing
+    },
     supply() {
       return this.$store.state.supply;
     },
@@ -272,11 +275,7 @@ export default {
   },
   methods: {
     dispense() {
-      this.isDispensing = true;
-      setTimeout(() => {
-        this.$store.dispatch("dispense");
-        this.isDispensing = false;
-      }, 3000);
+      this.$store.dispatch("dispense");
     },
     restock() {
       this.$store.dispatch("fetchFromInventory");
