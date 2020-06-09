@@ -254,11 +254,6 @@
 <script>
 export default {
   name: "VendingMachineAdmin",
-  data() {
-    return {
-      // isDispensing: false
-    };
-  },
   computed: {
     isDispensing() {
       return this.$store.state.isDispensing
